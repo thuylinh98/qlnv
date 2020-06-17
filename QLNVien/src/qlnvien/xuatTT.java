@@ -5,6 +5,8 @@
  */
 package qlnvien;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class xuatTT extends javax.swing.JFrame {
+public class xuatTT extends javax.swing.JFrame implements ActionListener{
 
     //DefaultTableMode tableModel;
      DefaultTableModel tableModel;
@@ -22,6 +24,7 @@ public class xuatTT extends javax.swing.JFrame {
      */
     public xuatTT() {
         initComponents();
+      ok.addActionListener((ActionListener) this);
         setLocationRelativeTo(null);
          tableModel = (DefaultTableModel) bangNV.getModel();
         
@@ -47,6 +50,7 @@ public class xuatTT extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         bangNV = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        ok = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +69,13 @@ public class xuatTT extends javax.swing.JFrame {
 
         jLabel1.setText("Thông Tin Nhân Viên");
 
+        ok.setText("OK");
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,6 +89,10 @@ public class xuatTT extends javax.swing.JFrame {
                         .addGap(257, 257, 257)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ok)
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,11 +101,17 @@ public class xuatTT extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ok)
+                .addGap(13, 13, 13))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_okActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,11 +152,18 @@ public class xuatTT extends javax.swing.JFrame {
     private javax.swing.JTable bangNV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton ok;
     // End of variables declaration//GEN-END:variables
 
-    private static class DefaultTableMode {
-
-        public DefaultTableMode() {
-        }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        okClick();
     }
+
+    public void okClick() {
+        new capNhatTT().setVisible(true);
+        this.dispose();
+
+    }
+
 }

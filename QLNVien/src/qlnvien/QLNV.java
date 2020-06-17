@@ -19,6 +19,7 @@ public class QLNV extends javax.swing.JFrame implements ActionListener {
      */
     public QLNV() {
         initComponents();
+                setLocationRelativeTo(null);
         capNhatTT.addActionListener(this);
         xuatTT.addActionListener(this);
     }
@@ -176,3 +177,5 @@ public class QLNV extends javax.swing.JFrame implements ActionListener {
 
     }
 }
+
+

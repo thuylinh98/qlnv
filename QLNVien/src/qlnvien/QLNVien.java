@@ -26,16 +26,22 @@ public class QLNVien {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        List <nhanvien> nhanvienList = new ArrayList<>();
-        Connection connection = null;
-        Statement statement = null;
-        //---------------------------------
-        
-        //---------------------------
-        try {
-            // lấy danh sách nv
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "linh", "12345678");
-            // truy vấn
+    }
+
+}
+
+
+
+//        List <nhanvien> nhanvienList = new ArrayList<>();
+//        Connection connection = null;
+//        Statement statement = null;
+//        //---------------------------------
+//        
+//        //---------------------------
+//        try {
+//            // lấy danh sách nv
+//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "root", "");
+//            // truy vấn
 //            String sql = "select * from nhanvien";
 //            statement = connection.createStatement();
 //            
@@ -48,25 +54,21 @@ public class QLNVien {
 //                        resultSet.getString("dia_chi"));
 //                nhanvienList.add(nv);
 //            }
-        } catch (SQLException ex) {
-            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(statement != null){
-                try {
-                    statement.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-         
-    }
-    
-}
+//        } catch (SQLException ex) {
+//            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            if(statement != null){
+//                try {
+//                    statement.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if (connection != null) {
+//                try {
+//                    connection.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
