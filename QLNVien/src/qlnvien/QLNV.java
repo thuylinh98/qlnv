@@ -163,13 +163,13 @@ public class QLNV extends javax.swing.JFrame implements ActionListener {
 
     public void capNhatTTClick() {
         new capNhatTT().setVisible(true);
-        //this.dispose();
+        this.dispose();
 
     }
 
     public void xuatTTClick() {
         new xuatTT().setVisible(true);
-        //this.dispose();
+        this.dispose();
 
     }
 

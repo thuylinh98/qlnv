@@ -60,171 +60,204 @@ public class nhanvienModify {
 
         return nhanvienList;
     }
+     public static List<taikhoan> findAllTK() {
+        List<taikhoan> taikhoanList = new ArrayList<>();
+        Statement statement = null;
+        //---------------------------------
 
-//    public static void insert(nhanvien std) {
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//        
-//        try {
-//            //lay tat ca danh sach sinh vien
-//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "root", "");
-//            
-//            //query
-//            String sql = "insert into nhanvien(ten, gioi_tinh, ngay_sinh, dia_chi, sdt) values(?, ?, ?, ?, ?)";
-//            statement = connection.prepareCall(sql);
-//            
-//            statement.setString(1, std.getTen());
-//            statement.setString(2, std.getGioi_tinh());
-//            statement.setString(3, std.getNgay_sinh());
-//            statement.setString(4, std.getDia_chi());
-//            statement.setString(5, std.getSdt());
-//            
-//            statement.execute();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            if(statement != null) {
-//                try {
-//                    statement.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//        //ket thuc.
-//    }
-//    
-//    public static void update(nhanvien std) {
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//        
-//        try {
-//            //lay tat ca danh sach sinh vien
-//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/slnv", "root", "");
-//            
-//            //query
-//            String sql = "update nhanvien set ten=?,gioi_tinh=?,ngay_sinh=?,dia_chi=?,sdt=? where id_NV = ?";
-//            statement = connection.prepareCall(sql);
-//            
-//            statement.setString(1, std.getTen());
-//            statement.setString(2, std.getGioi_tinh());
-//            statement.setString(3, std.getNgay_sinh());
-//            statement.setString(4, std.getDia_chi());
-//            statement.setString(5, std.getSdt());
-//            statement.setInt(6, std.getId_NV());
-//            
-//            statement.execute();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            if(statement != null) {
-//                try {
-//                    statement.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//        //ket thuc.
-//    }
-//    
-//    public static void delete(int id) {
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//        
-//        try {
-//            //lay tat ca danh sach sinh vien
-//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "root", "");
-//            
-//            //query
-//            String sql = "delete from nhanvien where id_NV = ?";
-//            statement = connection.prepareCall(sql);
-//            
-//            statement.setInt(1, id);
-//            
-//            statement.execute();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            if(statement != null) {
-//                try {
-//                    statement.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//        //ket thuc.
-//    }
-//    
-//    public static List<nhanvien> findByFullname(String fullname) {
-//        List<nhanvien> nhanvienList = new ArrayList<>();
-//        
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//        
-//        try {
-//            //lay tat ca danh sach sinh vien
-//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "root", "");
-//            
-//            //query
-//            String sql = "select * from nhanvien where ten like ?";
-//            statement = connection.prepareCall(sql);
-//            statement.setString(1, "%"+fullname+"%");
-//            
-//            ResultSet resultSet = statement.executeQuery();
-//            
-//            while (resultSet.next()) {                
-//                nhanvien std = new nhanvien(resultSet.getInt("id_NV"), 
-//                        resultSet.getString("ten"), resultSet.getString("gioi_tinh"), 
-//                        resultSet.getString("ngay)sinh"), resultSet.getString("dia_chi"), 
-//                        resultSet.getString("sdt"));
-//                nhanvienList.add(std);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            if(statement != null) {
-//                try {
-//                    statement.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//        //ket thuc.
-//      return nhanvienList;
-//    }
+        try (Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://127.0.0.1:3306/qlnv?serverTimezone=UTC", "root", "")) {
+
+            //...
+            String sql = "select * from taikhoan";
+            statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                taikhoan tk = new taikhoan(resultSet.getInt("id_TK"),
+                        resultSet.getString("ten_DN"), resultSet.getString("mat_khau")
+                        );
+                taikhoanList.add(tk);
+            }
+
+        } catch (Exception e) {
+            //Object ex = null;
+            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+
+        return taikhoanList;
+    }
+
+    public static void insert(nhanvien std) {
+     
+        PreparedStatement statement = null;
+        
+         try (Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://127.0.0.1:3306/qlnv?serverTimezone=UTC", "root", "")){
+            //lay tat ca danh sach sinh vien
+           
+            
+            //query
+            String sql = "insert into nhanvien(ten, gioi_tinh, ngay_sinh, dia_chi, sdt) values(?, ?, ?, ?, ?)";
+            statement = connection.prepareCall(sql);
+            
+            statement.setString(1, std.getTen());
+            statement.setString(2, std.getGioi_tinh());
+            statement.setString(3, std.getNgay_sinh());
+            statement.setString(4, std.getDia_chi());
+            statement.setString(5, std.getSdt());
+            
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            
+            
+        }
+        //ket thuc.
+    }
+    
+    public static void update(nhanvien std) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            //lay tat ca danh sach sinh vien
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/slnv", "root", "");
+            
+            //query
+            String sql = "update nhanvien set ten=?,gioi_tinh=?,ngay_sinh=?,dia_chi=?,sdt=? where id_NV = ?";
+            statement = connection.prepareCall(sql);
+            
+            statement.setString(1, std.getTen());
+            statement.setString(2, std.getGioi_tinh());
+            statement.setString(3, std.getNgay_sinh());
+            statement.setString(4, std.getDia_chi());
+            statement.setString(5, std.getSdt());
+            statement.setInt(6, std.getId_NV());
+            
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+    }
+    
+    public static void delete(int id) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            //lay tat ca danh sach sinh vien
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "root", "");
+            
+            //query
+            String sql = "delete from nhanvien where id_NV = ?";
+            statement = connection.prepareCall(sql);
+            
+            statement.setInt(1, id);
+            
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+    }
+    
+    public static List<nhanvien> findByFullname(String fullname) {
+        List<nhanvien> nhanvienList = new ArrayList<>();
+        
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            //lay tat ca danh sach sinh vien
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "root", "");
+            
+            //query
+            String sql = "select * from nhanvien where ten like ?";
+            statement = connection.prepareCall(sql);
+            statement.setString(1, "%"+fullname+"%");
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {                
+                nhanvien std = new nhanvien(resultSet.getInt("id_NV"), 
+                        resultSet.getString("ten"), resultSet.getString("gioi_tinh"), 
+                        resultSet.getString("ngay)sinh"), resultSet.getString("dia_chi"), 
+                        resultSet.getString("sdt"));
+                nhanvienList.add(std);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+      return nhanvienList;
+    }
 }

@@ -32,9 +32,10 @@ public class xuatTT extends javax.swing.JFrame implements ActionListener{
     }
     private void showNV(){
         List <nhanvien> nhanvienList = nhanvienModify.findAll();
+        
         tableModel.setRowCount(0);
        nhanvienList.forEach((nhanvien) -> {
-            tableModel.addRow(new Object[] {tableModel.getRowCount() + 1,nhanvien.getId_NV(), nhanvien.getTen(), 
+            tableModel.addRow(new Object[] {nhanvien.getId_NV(), nhanvien.getTen(), 
                 nhanvien.getGioi_tinh(), nhanvien.getNgay_sinh() , nhanvien.getDia_chi(), nhanvien.getSdt()});
         });
     }
@@ -161,7 +162,7 @@ public class xuatTT extends javax.swing.JFrame implements ActionListener{
     }
 
     public void okClick() {
-        new capNhatTT().setVisible(true);
+        new QLNV().setVisible(true);
         this.dispose();
 
     }

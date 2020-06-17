@@ -5,11 +5,14 @@
  */
 package qlnvien;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Admin
  */
-public class themNV extends javax.swing.JFrame {
+public class themNV extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form themNV
@@ -17,6 +20,7 @@ public class themNV extends javax.swing.JFrame {
     public themNV() {
         initComponents();
         setLocationRelativeTo(null);
+        ok.addActionListener(this);
     }
 
     /**
@@ -62,6 +66,11 @@ public class themNV extends javax.swing.JFrame {
         });
 
         ok.setText("OK");
+        ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,7 +139,14 @@ public class themNV extends javax.swing.JFrame {
 
     private void tenTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenTextActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_tenTextActionPerformed
+
+    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
+        // TODO add your handling code here
+        
+    }//GEN-LAST:event_okActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,4 +197,26 @@ public class themNV extends javax.swing.JFrame {
     private javax.swing.JTextField sdtText;
     private javax.swing.JTextField tenText;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        okClick();
+       
+    }
+     public void okClick() {
+         String ten =tenText.getText();
+           String ngaySinh =ngaySinhText.getText();
+               String diaChi=diaChiText.getText();
+                   String gioiTinh =gioiTinhText.getText();
+                   
+           String sdt =sdtText.getText();
+        nhanvien std = new nhanvien(ten,  gioiTinh,diaChi , sdt, ngaySinh);
+        
+        nhanvienModify.insert(std);
+        
+       // showNhanvie();
+         new capNhatTT().setVisible(true);
+             this.dispose();
+
+    }
 }

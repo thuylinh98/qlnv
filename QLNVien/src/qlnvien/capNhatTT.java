@@ -7,13 +7,15 @@ package qlnvien;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Admin
  */
 public class capNhatTT extends javax.swing.JFrame implements ActionListener {
-
+     DefaultTableModel tableModel;     
     /**
      * Creates new form capNhatTT
      */
@@ -22,9 +24,20 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
         themNV.addActionListener(this);
         xoaNV.addActionListener(this);
         suaNV.addActionListener(this);
+        back.addActionListener(this);
         setLocationRelativeTo(null);
+         setLocationRelativeTo(null);
+         tableModel = (DefaultTableModel) bangNV.getModel();
+         showNV();
     }
-
+private void showNV(){
+        List <nhanvien> nhanvienList = nhanvienModify.findAll();
+        tableModel.setRowCount(0);
+       nhanvienList.forEach((nhanvien) -> {
+            tableModel.addRow(new Object[] {tableModel.getRowCount() + 1,nhanvien.getId_NV(), nhanvien.getTen(), 
+                nhanvien.getGioi_tinh(), nhanvien.getNgay_sinh() , nhanvien.getDia_chi(), nhanvien.getSdt()});
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +52,8 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
         xoaNV = new javax.swing.JButton();
         suaNV = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bangNV = new javax.swing.JTable();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,30 +70,42 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
 
         suaNV.setText("Sửa Thông Tin Nhân Viên");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bangNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "Tên", "Giới Tính", "Ngày Sinh", "Địa Chỉ", "SĐT"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(bangNV);
+
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(suaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(xoaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(themNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(suaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(xoaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(themNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(back)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -88,7 +114,7 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -97,7 +123,9 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
                         .addGap(42, 42, 42)
                         .addComponent(xoaNV)
                         .addGap(37, 37, 37)
-                        .addComponent(suaNV)))
+                        .addComponent(suaNV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(back)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -107,6 +135,10 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
     private void themNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themNVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_themNVActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,9 +176,10 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
+    private javax.swing.JTable bangNV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton suaNV;
     private javax.swing.JButton themNV;
     private javax.swing.JButton xoaNV;
@@ -158,11 +191,14 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
             themNVClick();
         } else if (e.getSource().equals(xoaNV)) {
             xoaNVClick();
-        } else {
+        } else if(e.getSource().equals(suaNV)) {
             suaNVClick();
         }
+        else {
+            backClick();
+        }
     }
-
+ 
     public void themNVClick() {
         new themNV().setVisible(true);
         this.dispose();
@@ -175,5 +211,10 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
 
     public void suaNVClick() {
 
+    }
+
+    private void backClick() {
+        new QLNV().setVisible(true);
+        this.dispose();
     }
 }
