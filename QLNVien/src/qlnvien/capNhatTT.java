@@ -7,7 +7,10 @@ package qlnvien;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +18,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class capNhatTT extends javax.swing.JFrame implements ActionListener {
-     DefaultTableModel tableModel;     
+
+    DefaultTableModel tableModel;
+    List<nhanvien> nhanvienList = new ArrayList<>();
+
     /**
      * Creates new form capNhatTT
      */
@@ -26,18 +32,21 @@ public class capNhatTT extends javax.swing.JFrame implements ActionListener {
         suaNV.addActionListener(this);
         back.addActionListener(this);
         setLocationRelativeTo(null);
-         setLocationRelativeTo(null);
-         tableModel = (DefaultTableModel) bangNV.getModel();
-         showNV();
+        setLocationRelativeTo(null);
+        tableModel = (DefaultTableModel) bangNV.getModel();
+        showNV();
+       
     }
-private void showNV(){
-        List <nhanvien> nhanvienList = nhanvienModify.findAll();
+
+    private void showNV() {
+       nhanvienList = nhanvienModify.findAll();
         tableModel.setRowCount(0);
-       nhanvienList.forEach((nhanvien) -> {
-            tableModel.addRow(new Object[] {tableModel.getRowCount() + 1,nhanvien.getId_NV(), nhanvien.getTen(), 
-                nhanvien.getGioi_tinh(), nhanvien.getNgay_sinh() , nhanvien.getDia_chi(), nhanvien.getSdt()});
+        nhanvienList.forEach((nhanvien) -> {
+            tableModel.addRow(new Object[]{tableModel.getRowCount() + 1, nhanvien.getId_NV(), nhanvien.getTen(),
+                nhanvien.getGioi_tinh(), nhanvien.getNgay_sinh(), nhanvien.getDia_chi(), nhanvien.getSdt()});
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -191,14 +200,13 @@ private void showNV(){
             themNVClick();
         } else if (e.getSource().equals(xoaNV)) {
             xoaNVClick();
-        } else if(e.getSource().equals(suaNV)) {
+        } else if (e.getSource().equals(suaNV)) {
             suaNVClick();
-        }
-        else {
+        } else {
             backClick();
         }
     }
- 
+
     public void themNVClick() {
         new themNV().setVisible(true);
         this.dispose();
@@ -206,6 +214,19 @@ private void showNV(){
     }
 
     public void xoaNVClick() {
+        int selectedIndex = bangNV.getSelectedRow();
+        if(selectedIndex >= 0) {
+            nhanvien std = nhanvienList.get(selectedIndex);
+            
+            int option = JOptionPane.showConfirmDialog(this, "Do you want to delete this item?");
+            System.out.println("option : " + option);
+            
+            if(option == 0) {
+                nhanvienModify.delete(std.getId_NV());
+                
+                showNV();
+            }
+        }
 
     }
 

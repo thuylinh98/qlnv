@@ -178,12 +178,14 @@ public class nhanvienModify {
     }
     
     public static void delete(int id) {
-        Connection connection = null;
+       
         PreparedStatement statement = null;
         
-        try {
+        try (Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://127.0.0.1:3306/qlnv?serverTimezone=UTC", "root", "")) {
             //lay tat ca danh sach sinh vien
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlnv", "root", "");
+            
+            
             
             //query
             String sql = "delete from nhanvien where id_NV = ?";
@@ -203,13 +205,7 @@ public class nhanvienModify {
                 }
             }
             
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(nhanvienModify.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            
         }
         //ket thuc.
     }
